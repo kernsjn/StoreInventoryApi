@@ -86,19 +86,19 @@ namespace StoreInventoryApi.Controllers
     }
 
 
-    [HttpGet("{stock}")]
-    public ActionResult GetInStock(int NumberInStock)
+    [HttpGet("stock")]
+    public ActionResult GetInStock()
     {
       var db = new DatabaseContext();
       return Ok(db.Items.Where(item => item.NumberInStock == 0));
 
     }
 
-    [HttpGet("{sku}")]
-    public ActionResult GetSearchBySKU(int SKU)
+    [HttpGet("sku/{sku}")]
+    public ActionResult GetSearchBySKU(int sku)
     {
       var db = new DatabaseContext();
-      var item = db.Items.FirstOrDefault(it => it.SKU == SKU);
+      var item = db.Items.FirstOrDefault(it => it.SKU == sku);
       if (item == null)
       {
         return NotFound();
