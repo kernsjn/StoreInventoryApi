@@ -94,8 +94,21 @@ namespace StoreInventoryApi.Controllers
 
     }
 
-
-    
-
+    [HttpGet("{sku}")]
+    public ActionResult GetSearchBySKU(int SKU)
+    {
+      var db = new DatabaseContext();
+      var item = db.Items.FirstOrDefault(it => it.SKU == SKU);
+      if (item == null)
+      {
+        return NotFound();
+      }
+      else
+      {
+        return Ok(item);
+      }
+    }
   }
+
 }
+
